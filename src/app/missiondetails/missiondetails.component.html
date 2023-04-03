@@ -1,2 +1,19 @@
-API doesn't read, passing in an undefined object when using Flight Number to access the object
-<p>Selected Flight Number: {{flight_number}}</p>
+<h1 class="text-center p-5 text-5xl">SpaceX Mission Details</h1>
+<div class="rounded-md flex items-center box-content p-4 m-4 border-4 border-white bg-gray-800">
+    <img  src="{{launch.links.mission_patch_small}}" alt="mission_patch"/>
+    
+    <div class="pl-5">
+        <strong class="text-3xl">Mission - {{launch.mission_name}}</strong>
+        <p>Launch Year: {{launch.launch_year}}</p>
+        <br/>
+        <h3 class="text-2xl">Rocket</h3>
+        <p>Name: {{launch.rocket.rocket_name}}</p>
+        <p>Type: {{launch.rocket.rocket_type}}</p>
+        <br/>
+        <h3 class="text-2xl">Launch Site</h3>
+        <p>Location: {{launch.launch_site.site_name_long}}</p>
+        <br/>
+        <h3 class="text-2xl">Launch Details</h3>
+        <p>{{launch.details}}</p>
+    </div>
+</div>
