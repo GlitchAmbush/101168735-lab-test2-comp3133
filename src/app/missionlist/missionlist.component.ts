@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-missionlist',
@@ -8,9 +9,9 @@ import { Component } from '@angular/core';
 })
 export class MissionlistComponent {
   launches: any[] = [];
+  flightNum: number | undefined;
   yearSelected: number | undefined;
   launchYears = ['2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'];
-  flightNum: number | undefined;
   
   constructor(private http: HttpClient) {
     this.loadLaunches();
@@ -35,11 +36,5 @@ export class MissionlistComponent {
 
   clearFilter() {
     this.loadLaunches();
-  }
-
-  getLaunchByFlightNum(num: number) {
-    this.http.get(`https://api.spacexdata.com/v3/launches/${num}}`).subscribe((response: any) => {
-      this.flightNum = num;
-    })
   }
 }

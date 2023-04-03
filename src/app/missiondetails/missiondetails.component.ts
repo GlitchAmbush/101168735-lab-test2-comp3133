@@ -1,22 +1,34 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-missiondetails',
   templateUrl: './missiondetails.component.html',
   styleUrls: ['./missiondetails.component.css']
 })
-export class MissiondetailsComponent {
-  @Input() flightNum: number | undefined;
+export class MissiondetailsComponent implements OnInit {
   launch: any;
+  flight_number: any;
+  
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) {
 
-  constructor(private http: HttpClient) {
-    this.getLaunch(this.flightNum);
   }
 
-  getLaunch(flightNum: number | undefined) {
-    this.http.get(`https://api.spacexdata.com/v3/launches/${flightNum}`).subscribe((response: any) => {
-      this.launch = response;
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.flight_number = params.get('flight_number');
+      console.log(this.flight_number)
+
+      this.http.get(`https://api.spacexdata.com/v3/launches/${this.flight_number}`).subscribe(response => {
+        this.launch = response;
+      });
+      console.log(this.launch);
     });
+  }
+
+  
+  loadLaunches() {
+    
   }
 }
