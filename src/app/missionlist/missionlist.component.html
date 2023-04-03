@@ -1,0 +1,8 @@
+<p>missionlist works!</p>
+
+<div *ngFor="let launch of launches">
+    <h1>{{launch.mission_name}}</h1>
+    <p>Year: {{launch.launch_year}}</p>
+    <p>{{launch.details}}</p>
+    <img src="{{ launch.mission_patch_small }}" alt="mission_patch" />
+</div>
