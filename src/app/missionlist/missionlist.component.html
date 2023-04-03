@@ -1,8 +1,25 @@
-<p>missionlist works!</p>
-
-<div *ngFor="let launch of launches">
-    <h1>{{launch.mission_name}}</h1>
-    <p>Year: {{launch.launch_year}}</p>
-    <p>{{launch.details}}</p>
-    <img src="{{ launch.mission_patch_small }}" alt="mission_patch" />
+<div>
+    <h1 class="text-center p-5 text-5xl">SpaceX Mission Launch List</h1>
+    <app-missiondetails [flightNum] = "flightNum"></app-missiondetails>
+    <div class="">
+        <div class="grid grid-cols-10 gap-4">
+            <div class="rounded-md fixed w-1/4 top-25 right-5 text-center col-span-3 row-span-2 border-4 border-white bg-gray-800 m-4 p-4">
+                <h3 class="text-3xl">Launch Year</h3>
+                <ul class="p-4">
+                    <li class="rounded p-1 m-1 bg-red-600 active:bg-red-700" (click)="clearFilter()">Clear Filter</li>
+                    <li class="rounded p-1 m-1 bg-orange-600 active:bg-orange-700" *ngFor="let year of launchYears; let i = index" (click)="filterLaunch(i, year)">{{year}}</li>
+                </ul>
+            </div>
+        
+            <div *ngFor="let launch of launches" class="rounded-md flex items-center col-span-7 box-content p-4 m-4 border-4 border-white bg-gray-800">
+                <img class="scale-50" src="{{launch.links.mission_patch_small}}" alt="mission_patch" />
+                <div class="p-4">
+                    <a class="text-3xl">{{launch.mission_name}}</a>
+                    <p class="text-2xl">Year: {{launch.launch_year}}</p>
+                    <p>{{launch.details}}</p>
+                    <button class="rounded p-1 px-2 mt-2 bg-orange-600 active:bg-orange-700" (click)="getLaunchByFlightNum(launch.flight_number)">Show Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
